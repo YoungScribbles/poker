@@ -1,13 +1,12 @@
 #include "player.h"
+#include "table.h"
 
 Player::Player(string name, Table* table) {
     mName = name;
     mTable = table;
-    printf("Created player: %s\n", mName);
 }
 
 Player::~Player() {
-    printf("Destroyed player: %s\n", mName);
 }
 
 void Player::giveCard(Card card) {
@@ -21,4 +20,9 @@ void Player::discard() {
     else {
         printf("mTable is NULL");
     }
+}
+
+void Player::report() {
+    printf("\t --- %s has:\n", mName.c_str());
+    mCards.printCards();
 }

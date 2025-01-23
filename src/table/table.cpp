@@ -1,25 +1,28 @@
 #include "table.h"
+#include "player.h"
 
 Table::Table() {
-    mDealerPos = 0;
 }
 
 Table::~Table() {
 }
 
-void Table::deal(Deck* d) {
-    int dealing = mPlayers.size() * 2;
-    int cardsDealt = 0;
-    int pos = mDealerPos + 1;
+void Table::play(Card card) {
+    mLive.placeTop(card);
+}
 
-    // TODO: Prevent a player from leaving mid deal
-    while (cardsDealt < dealing) {
-        if (pos >= mPlayers.size()) {
-            pos = 0;
-        }
+void Table::play(vector<Card> cards) {
+    mLive.placeTop(cards);
+}
 
-        mPlayers[pos].giveCard(d->drawTop());
+void Table::play(Pile cards) {
+    while (!cards.empty()) {
+        mLive.placeTop(cards.drawTop());
     }
+}
+
+void Table::muck(Card card) {
+    mMuck.placeTop(card);
 }
 
 void Table::muck(vector<Card> cards) {
@@ -32,19 +35,23 @@ void Table::muck(Pile cards) {
     }
 }
 
-void Table::addPlayer(Player* p) {
+Pile Table::recycleCards() {
+    Pile cards;
 
+    while (!mMuck.empty()) {
+        cards.placeTop(mMuck.drawTop());
+    }
+    while (!mLive.empty()) {
+        cards.placeTop(mLive.drawTop());
+    }
+    return cards;
 }
 
-void Table::removePlayer(Player* p) {
+void Table::report() {
+    printf("Table::report()\n");
+    printf("\t\tLive Cards:\n");
+    mLive.printCards();
 
-}
-
-void Table::removePlayer(int pos) {
-    if (mPlayers.size() > pos) {
-        mPlayers.erase(mPlayers.begin() + pos);
-    }
-    else {
-        printf("Error: Cannot remove player at position %d\n", pos);
-    }
+    printf("\t\tDead Cards:\n");
+    mMuck.printCards();
 }

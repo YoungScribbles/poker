@@ -41,4 +41,5 @@ void Deck::shuffle() {
     }
 
     mCards = cards;
+    // printf("Shuffled\n");
 }

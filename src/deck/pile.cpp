@@ -39,6 +39,12 @@ void Pile::placeTop(vector<Card> cards) {
     }
 }
 
+void Pile::placeTop(Pile pile) {
+    while (!pile.empty()) {
+        mCards.push_back(pile.drawTop());
+    }
+}
+
 void Pile::printCards() {
     // Print the cards in the pile
     for (auto it = mCards.begin(); it != mCards.end(); ++it) {

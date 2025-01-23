@@ -3,32 +3,37 @@
 
 #include <vector>
 
-#include "player.h"
 #include "../deck/deck.h"
 
 using namespace std;
 
 class Table
 {
+    friend class Game;
+
 public:
     Table();
     ~Table();
 
-    void deal(Deck* d);
+    void play(Card card);
+    void play(vector<Card> cards);
+    void play(Pile cards);
 
+    void muck(Card card);
     void muck(vector<Card> cards);
     void muck(Pile cards);
 
-    void addPlayer(Player* p);
-    void removePlayer(Player* p);
-    void removePlayer(int pos);
+// Getter
+    Pile cards() { return mLive; }
 
 private:
-    vector<Player> mPlayers;
-    int mDealerPos;
+    Pile dead() { return mMuck; }   // DEBUG: dead cards should probably be obscured
+    Pile recycleCards();
+    void report(); // DEBUG: dead cards should probably be obscured
 
+private:
     Pile mLive;
     Pile mMuck;
-}
+};
 
 #endif // TABLE_H

@@ -4,11 +4,11 @@
 #include <string>
 #include <vector>
 
-#include "table.h"
 #include "../deck/pile.h"
 
 using namespace std;
 
+class Table;    // Forward dec.
 class Player {
 public:
     Player(string name, Table* table);
@@ -16,6 +16,8 @@ public:
 
     void giveCard(Card card);
     void discard();
+
+    void report();
 
 // Getters
 public:
@@ -27,6 +29,6 @@ private:
 
     Pile mCards;
     Table* mTable;
-}
+};
 
 #endif // PLAYER_H

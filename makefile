@@ -1,10 +1,9 @@
 # Compiler and flags
 CXX = g++                   
 LDFLAGS =
-CXXFLAGS = -I./src  # Include headers from the src directory
+CXXFLAGS = -I./src
 
-# Include the sources.mk file that contains the source files
-include sources.mk  # Ensure sources.mk contains SRCS variable
+include sources.mk 
 
 # Define the object directory
 OBJDIR = obj
@@ -12,10 +11,9 @@ OBJDIR = obj
 # Define the object files based on the source files
 OBJS = $(SRCS:src/%.cpp=$(OBJDIR)/%.o)
 
-# Target executable
 TARGET = poker
 
-# Default target
+# Default
 all: $(TARGET)
 
 # Rule to create the target executable from object files
@@ -26,6 +24,7 @@ $(TARGET): $(OBJS)
 $(OBJDIR)/%.o: src/%.cpp
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)/deck
+	@mkdir -p $(OBJDIR)/table
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean rule to remove compiled files
