@@ -9,7 +9,7 @@ public:
     Card(char s, int v);
     ~Card();
 
-    void debug();
+    void print();
 
 private:
     std::string suit();

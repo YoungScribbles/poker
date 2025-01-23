@@ -3,17 +3,15 @@
 #include "card.h"
 
 
-Card::Card(char s, int v)
-{
+Card::Card(char s, int v) {
     mSuit = s;
     mValue = v;
 }
 
-Card::~Card()
-{
+Card::~Card() {
 }
 
-void Card::debug() {
+void Card::print() {
     printf("%s of %s\n", val().c_str(), suit().c_str());
 }
 

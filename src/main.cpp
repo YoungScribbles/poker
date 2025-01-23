@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "deck.h"
+#include "deck/deck.h"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ int main() {
 
     for (int i = 0; i < 5; ++i) {
         d.shuffle();
-        d.printDeck();
+        d.printCards();
     }
 
     return 0;
